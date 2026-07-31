@@ -700,3 +700,154 @@ a {
     margin-top: 1rem;
   }
 }
+
+
+
+/* SECTION TÉMOIGNAGES */
+.testimonials-section {
+  padding: 5rem 1.5rem;
+  background-color: #f9fafb;
+}
+
+.testimonials-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Centre tous les enfants horizontalement */
+}
+
+/* EN-TÊTE CENTRÉ */
+.testimonials-header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.testimonials-title {
+  font-size: clamp(2rem, 3.5vw, 2.6rem);
+  font-weight: 800;
+  color: #111827;
+  letter-spacing: -0.02em;
+}
+
+/* GRILLE & CARTES */
+.testimonials-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  width: 100%;
+  margin-bottom: 2.5rem;
+}
+
+.testimonial-card {
+  background: #ffffff;
+  border-radius: 20px;
+  padding: 2rem 1.75rem;
+  border: 1px solid #f3f4f6;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.02);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 240px;
+}
+
+.testimonial-stars {
+  color: #f59e0b; /* Jaune/Orange des étoiles */
+  font-size: 0.95rem;
+  display: flex;
+  gap: 4px;
+  margin-bottom: 1.25rem;
+}
+
+.testimonial-quote {
+  font-size: 0.95rem;
+  color: #4b5563;
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
+}
+
+/* AUTEUR DES AVIS */
+.testimonial-author {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-top: auto;
+}
+
+.author-avatar {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background-color: #3b3a36; /* Cercle sombre d'origine */
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 0.9rem;
+  flex-shrink: 0;
+}
+
+.author-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.author-name {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #111827;
+  line-height: 1.2;
+}
+
+.author-city {
+  font-size: 0.8rem;
+  color: #9ca3af;
+  margin-top: 2px;
+}
+
+/* PAGINATION DOTS CENTRÉE */
+.testimonials-pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.pagination-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: #d1d5db;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.pagination-dot.active {
+  background-color: #2563eb; /* Bleu actif */
+  width: 9px;
+  height: 9px;
+}
+
+/* RESPONSIVE TABLETTE & MOBILE */
+@media (max-width: 1024px) {
+  .testimonials-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 680px) {
+  .testimonials-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .testimonials-header {
+    margin-bottom: 2rem;
+  }
+
+  .testimonials-title {
+    text-align: center;
+  }
+}
