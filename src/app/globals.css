@@ -851,3 +851,58 @@ a {
     text-align: center;
   }
 }
+
+
+
+/* BOUTON RETOUR EN HAUT FIXE (EN BAS À DROITE) */
+.scroll-top-btn-fixed {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 99;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  background-color: #2563eb;
+  color: #111827;
+  border: 1px solid #e5e7eb;
+  padding: 12px 24px;
+  border-radius: 30px;
+  font-size: 0.9rem;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  transition: all 0.25s ease;
+}
+
+.scroll-top-btn-fixed:hover {
+  background-color: #2563eb;
+  color: #ffffff;
+  border-color: #2563eb;
+  transform: translateY(-3px);
+  box-shadow: 0 12px 28px rgba(37, 99, 235, 0.3);
+}
+
+.scroll-top-btn-fixed i {
+  font-size: 0.9rem;
+  transition: transform 0.25s ease;
+}
+
+.scroll-top-btn-fixed:hover i {
+  transform: translateY(-2px);
+}
+
+/* Sur petit écran (Mobile) : bouton icône circulaire pour ne pas gêner le contenu */
+@media (max-width: 640px) {
+  .scroll-top-btn-fixed span {
+    display: none;
+  }
+
+  .scroll-top-btn-fixed {
+    padding: 14px;
+    border-radius: 50%;
+    bottom: 16px;
+    right: 16px;
+  }
+}

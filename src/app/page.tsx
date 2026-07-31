@@ -1,10 +1,20 @@
+"use client";
+
 import Link from "next/link";
 import Hero from "@/components/Hero";
 import Categories from "@/components/Categories";
 import BestSellers from "@/components/BestSellers";
 import WhyUs from "@/components/WhyUs";
+import Testimonials from "@/components/Testimonials";
 
 export default function Home() {
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  };
+
   return (
     <main>
       {/* 1. Hero Carousel */}
@@ -16,11 +26,10 @@ export default function Home() {
       {/* 3. Section Best-Sellers */}
       <BestSellers />
 
-      {/* 5. Pourquoi SwissHolz */}
+      {/* 4. Pourquoi SwissHolz */}
       <WhyUs />
 
-
-       {/* 4. Bannière Promotionnelle (Offre d'hiver) */}
+      {/* 5. Bannière Promotionnelle (Offre d'hiver) */}
       <section className="promo-banner-section">
         <div className="promo-banner-container">
           <div className="promo-banner-content">
@@ -48,6 +57,23 @@ export default function Home() {
           </Link>
         </div>
       </section>
+
+      {/* 6. Témoignages */}
+      <Testimonials />
+
+      {/* 7. Section Bouton Retour en haut */}
+      <section className="scroll-top-section">
+        {/* Bouton Retour en haut fixe */}
+<button
+  onClick={scrollToTop}
+  className="scroll-top-btn-fixed"
+  aria-label="Retour en haut de la page"
+>
+  <i className="fa-solid fa-arrow-up"></i>
+  {/* <span>Retour en haut</span> */}
+</button>
+      </section>
+
     </main>
   );
 }
