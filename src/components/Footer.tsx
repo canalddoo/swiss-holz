@@ -16,8 +16,8 @@ export default function Footer() {
             />
           </div>
           <p className="footer-description">
-            Carburants suisses de la plus haute qualité, issus directement de
-            forêts gérées durablement.
+            Schweizer Brennstoffe von höchster Qualität, direkt aus nachhaltig
+            bewirtschafteten Wäldern.
           </p>
           <div className="social-links">
             <a href="#" aria-label="Facebook" className="social-icon">
@@ -26,44 +26,65 @@ export default function Footer() {
             <a href="#" aria-label="Instagram" className="social-icon">
               <i className="fa-brands fa-instagram"></i>
             </a>
-           
           </div>
         </div>
 
         {/* Colonne 2 : Produits */}
         <div className="footer-col">
-          <h4 className="footer-heading">PRODUITS</h4>
+          <h4 className="footer-heading">PRODUKTE</h4>
           <ul className="footer-links-list">
-            <li><Link href="/bois-de-chauffage">bois de chauffage</Link></li>
-            <li><Link href="/granules">Granulés</Link></li>
-            <li><Link href="/briquettes">Briquettes</Link></li>
-            <li><Link href="/bois-presse">Bois pressé</Link></li>
-            <li><Link href="/fours">Fours</Link></li>
+            <li>
+              <Link href="/bois-de-chauffage">Brennholz</Link>
+            </li>
+            <li>
+              <Link href="/granules">Holzpellets</Link>
+            </li>
+            <li>
+              <Link href="/briquettes">Holzbriketts</Link>
+            </li>
+            <li>
+              <Link href="/bois-presse">Pressholz</Link>
+            </li>
+            <li>
+              <Link href="/fours">Kaminöfen</Link>
+            </li>
           </ul>
         </div>
 
         {/* Colonne 3 : Information */}
         <div className="footer-col">
-          <h4 className="footer-heading">INFORMATION</h4>
+          <h4 className="footer-heading">INFORMATIONEN</h4>
           <ul className="footer-links-list">
-            <li><Link href="/livraison">Livraison</Link></li>
-            <li><Link href="/paiement">paiement</Link></li>
-            <li><Link href="/termes-et-conditions">Termes et conditions</Link></li>
+            <li>
+              <Link href="/livraison">Lieferung</Link>
+            </li>
+            <li>
+              <Link href="/paiement">Zahlung</Link>
+            </li>
+            <li>
+              <Link href="/termes-et-conditions">
+                Allgemeine Geschäftsbedingungen
+              </Link>
+            </li>
           </ul>
         </div>
 
-        {/* Colonne 4 : Soutien */}
+        {/* Colonne 4 : Support */}
         <div className="footer-col">
-          <h4 className="footer-heading">SOUTIEN</h4>
+          <h4 className="footer-heading">SUPPORT</h4>
           <ul className="footer-links-list">
-            <li><Link href="/faq">FAQ</Link></li>
-            <li><Link href="/contact">contact</Link></li>
+            <li>
+              <Link href="/faq">FAQ</Link>
+            </li>
+            <li>
+              <Link href="/contact">Kontakt</Link>
+            </li>
           </ul>
         </div>
 
-        {/* Bloc Contact (Positionné sous la première colonne en Desktop) */}
+        {/* Colonne 5 : Contact */}
         <div className="footer-col contact-col">
-          <h4 className="footer-heading">CONTACT</h4>
+          <h4 className="footer-heading">KONTAKT</h4>
           <ul className="contact-info-list">
             <li>
               <i className="fa-solid fa-location-dot"></i>
@@ -85,7 +106,7 @@ export default function Footer() {
       <div className="footer-bottom-bar">
         <div className="footer-bottom-container">
           <p className="copyright-text">
-            © 2026 SwissHolz. Tous droits réservés.
+            © 2026 SwissHolz. Alle Rechte vorbehalten.
           </p>
           <div className="payment-icons">
             <span className="payment-card">VISA</span>

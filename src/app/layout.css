@@ -890,3 +890,383 @@ a {
     gap: 1.25rem;
   }
 }
+
+
+
+
+/* PAGE À PROPOS */
+.about-page {
+  background-color: #f9fafb;
+  color: #374151;
+}
+
+.about-container {
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+.about-subtitle-tag {
+  display: block;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #854d0e; /* Couleur bois/terracotta */
+  margin-bottom: 0.75rem;
+}
+
+.about-text {
+  font-size: 0.95rem;
+  line-height: 1.7;
+  color: #6b7280;
+  margin-bottom: 1.25rem;
+}
+
+/* SECTION 1: 3 COLONNES */
+.about-intro-section {
+  padding: 5rem 0;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.about-grid-3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 3rem;
+}
+
+.about-col {
+  display: flex;
+  flex-direction: column;
+}
+
+.flex-between {
+  justify-content: space-between;
+}
+
+.about-col-title {
+  font-size: clamp(2rem, 3vw, 2.75rem);
+  font-weight: 800;
+  color: #111827;
+  letter-spacing: -0.02em;
+  margin-bottom: 1.5rem;
+  line-height: 1.15;
+}
+
+.about-col-h3 {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #111827;
+  line-height: 1.35;
+  margin-bottom: 1.25rem;
+}
+
+.about-link-btn {
+  display: inline-block;
+  font-size: 0.8rem;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  color: #111827;
+  text-decoration: underline;
+  text-underline-offset: 6px;
+  text-decoration-thickness: 2px;
+  transition: color 0.2s ease;
+  margin-top: 1.5rem;
+}
+
+.about-link-btn:hover {
+  color: #2563eb;
+}
+
+/* SECTION 2: FEATURE WITH IMAGE */
+.about-feature-section {
+  padding: 5rem 0;
+}
+
+.about-feature-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: center;
+}
+
+.about-image-wrapper {
+  position: relative;
+  width: 100%;
+  height: 580px;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+}
+
+.about-img {
+  object-fit: cover;
+}
+
+.about-main-title {
+  font-size: clamp(2.2rem, 3.5vw, 3rem);
+  font-weight: 800;
+  color: #111827;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+  margin-bottom: 1.5rem;
+}
+
+.about-highlight-text {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: #9ca3af;
+  margin-bottom: 1.5rem;
+}
+
+/* SOCIAL ICONS */
+.about-social-divider {
+  margin-top: 2rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid #e5e7eb;
+}
+
+.about-social-links {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.social-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background-color: #f3f4f6;
+  color: #4b5563;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.85rem;
+  transition: all 0.2s ease;
+}
+
+.social-icon:hover {
+  background-color: #111827;
+  color: #ffffff;
+  transform: translateY(-2px);
+}
+
+/* RESPONSIVE DESIGN */
+@media (max-width: 1024px) {
+  .about-grid-3 {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+  }
+
+  .about-feature-grid {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+  }
+
+  .about-image-wrapper {
+    height: 400px;
+  }
+}
+
+@media (max-width: 640px) {
+  .about-intro-section,
+  .about-feature-section {
+    padding: 3rem 0;
+  }
+
+  .about-image-wrapper {
+    height: 300px;
+  }
+}
+
+
+
+
+/* SECTION CONTACT */
+.contact-section {
+  padding: 5rem 1.5rem;
+  background-color: #ffffff;
+}
+
+.contact-container {
+  max-width: 1240px;
+  margin: 0 auto;
+}
+
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1fr 1px 1fr;
+  gap: 4rem;
+  align-items: start;
+}
+
+.vertical-divider {
+  width: 1px;
+  height: 100%;
+  background-color: #f3f4f6;
+}
+
+/* TITRES COMMUNS */
+.section-subtitle {
+  display: block;
+  font-size: 0.8rem;
+  color: #9ca3af;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 0.5rem;
+}
+
+.section-title {
+  font-size: 1.5rem;
+  font-weight: 500;
+  color: #111827;
+  margin-bottom: 2.5rem;
+  line-height: 1.3;
+  text-transform: uppercase;
+}
+
+.form-column .section-title {
+  text-transform: none; /* Le titre de droite n'est pas en majuscules sur l'image */
+}
+
+/* ACCORDÉON FAQ */
+.faq-accordion {
+  display: flex;
+  flex-direction: column;
+}
+
+.faq-item {
+  border-bottom: 1px solid #f3f4f6;
+  padding: 0.5rem 0;
+}
+
+.faq-question {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: none;
+  border: none;
+  padding: 1.25rem 0;
+  font-size: 0.95rem;
+  font-weight: 400;
+  color: #374151;
+  text-align: left;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.faq-question:hover {
+  color: #d97706;
+}
+
+.faq-question i {
+  font-size: 0.8rem;
+  color: #d1d5db;
+  transition: transform 0.3s ease;
+}
+
+.faq-answer-wrapper {
+  overflow: hidden;
+  transition: all 0.3s ease-in-out;
+}
+
+.faq-answer {
+  padding-bottom: 1.5rem;
+  font-size: 0.9rem;
+  color: #6b7280;
+  line-height: 1.6;
+}
+
+/* FORMULAIRE DE CONTACT */
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+/* Le premier champ (bordure complète) */
+.input-full-bordered {
+  width: 100%;
+  padding: 0.875rem 1rem;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  color: #374151;
+  outline: none;
+  background-color: #ffffff;
+  transition: border-color 0.2s ease;
+}
+
+.input-full-bordered:focus {
+  border-color: #d97706;
+}
+
+/* Grille pour les champs divisés */
+.input-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+}
+
+/* Champs avec bordure uniquement en bas */
+.input-underline {
+  width: 100%;
+  padding: 0.5rem 0;
+  border: none;
+  border-bottom: 1px solid #e5e7eb;
+  background: transparent;
+  font-size: 0.95rem;
+  color: #374151;
+  outline: none;
+  transition: border-color 0.2s ease;
+}
+
+.input-underline::placeholder {
+  color: #4b5563; /* Couleur plus foncée pour correspondre à l'image */
+  font-weight: 400;
+}
+
+.input-underline:focus {
+  border-color: #d97706;
+}
+
+.textarea {
+  resize: vertical;
+  min-height: 80px;
+}
+
+/* BOUTON SOUMETTRE */
+.btn-submit-contact {
+  align-self: flex-start;
+  background-color: #d97706; /* Orange boisé / Gold */
+  color: #ffffff;
+  border: none;
+  padding: 12px 24px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.btn-submit-contact:hover {
+  background-color: #b45309;
+}
+
+/* RESPONSIVE */
+@media (max-width: 992px) {
+  .contact-grid {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+  
+  .vertical-divider {
+    display: none;
+  }
+}
+
+@media (max-width: 640px) {
+  .input-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+}

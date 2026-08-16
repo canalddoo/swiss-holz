@@ -12,25 +12,24 @@ interface Feature {
 const features: Feature[] = [
   {
     icon: "fa-solid fa-truck-fast",
-    title: "Livraison rapide",
-    description: "Livraison à domicile en 24 à 72 heures, partout en Suisse.",
-    active: true, // Met le fond bleu sur l'icône comme sur le design mobile
+    title: "Schnelle Lieferung",
+    description: "Lieferung nach Hause innerhalb von 24 bis 72 Stunden in der ganzen Schweiz.",
+    active: true,
   },
   {
     icon: "fa-solid fa-award",
-    title: "Qualité supérieure",
-    description: "Bois suisse, séché au four et certifié.",
+    title: "Höchste Qualität",
+    description: "Schweizer Holz, ofengetrocknet und zertifiziert.",
   },
   {
     icon: "fa-solid fa-shield-halved",
-    title: "Paiement sécurisé",
-    description: "TWINT, carte ou facture – entièrement crypté.",
+    title: "Sichere Zahlung",
+    description: "TWINT, Kreditkarte oder Kauf auf Rechnung – vollständig verschlüsselt.",
   },
   {
     icon: "fa-solid fa-headset",
-    title: "Service client",
-    description:
-      "Des consultations individuelles sont disponibles du lundi au samedi.",
+    title: "Kundenservice",
+    description: "Persönliche Beratung steht Ihnen von Montag bis Samstag zur Verfügung.",
   },
 ];
 
@@ -42,10 +41,10 @@ interface Stat {
 }
 
 const stats: Stat[] = [
-  { id: "clients", target: 15000, suffix: "+", label: "CLIENTS SATISFAITS" },
-  { id: "steres", target: 25000, suffix: "", label: "STÉRÉOS LIVRÉS" },
-  { id: "experience", target: 12, suffix: "", label: "DES ANNÉES D'EXPÉRIENCE" },
-  { id: "cantons", target: 26, suffix: "", label: "CANTONS FOURNIS" },
+  { id: "clients", target: 15000, suffix: "+", label: "ZUFRIEDENE KUNDEN" },
+  { id: "steres", target: 25000, suffix: "", label: "GELIEFERTE STER" },
+  { id: "experience", target: 12, suffix: "", label: "JAHRE ERFAHRUNG" },
+  { id: "cantons", target: 26, suffix: "", label: "BELIEFERTE KANTONE" },
 ];
 
 export default function WhyUs() {
@@ -77,7 +76,7 @@ export default function WhyUs() {
   }, [hasAnimated]);
 
   const animateStats = () => {
-    const duration = 2000; // 2 secondes de durée
+    const duration = 2000;
     const steps = 50;
     const intervalTime = duration / steps;
 
@@ -108,16 +107,16 @@ export default function WhyUs() {
   return (
     <section className="whyus-section" ref={sectionRef}>
       <div className="whyus-container">
-        {/* En-tête */}
+        {/* Header */}
         <div className="whyus-header">
-          <h2 className="whyus-title">Pourquoi SwissHolz</h2>
+          <h2 className="whyus-title">Warum SwissHolz</h2>
           <p className="whyus-subtitle">
-            Quatre promesses sur lesquelles vous pouvez compter.
+            Vier Versprechen, auf die Sie sich verlassen können.
           </p>
           <div className="whyus-line"></div>
         </div>
 
-        {/* Grille des 4 avantages */}
+        {/* Vorteils-Raster */}
         <div className="features-grid">
           {features.map((feature, idx) => (
             <div key={idx} className="feature-card">
@@ -134,12 +133,12 @@ export default function WhyUs() {
           ))}
         </div>
 
-        {/* Bandeau des statistiques dynamiques */}
+        {/* Dynamischer Statistik-Banner */}
         <div className="stats-banner">
           {stats.map((stat) => (
             <div key={stat.id} className="stat-item">
               <div className="stat-number">
-                {counts[stat.id].toLocaleString("fr-CH")}
+                {counts[stat.id].toLocaleString("de-CH")}
                 {stat.suffix}
               </div>
               <div className="stat-label">{stat.label}</div>

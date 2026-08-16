@@ -13,19 +13,17 @@ export default function CartPage() {
 
   return (
     <>
-    
-
       <main className="cart-page">
         <div className="cart-container">
-          <h1 className="cart-page-title">Mon Panier</h1>
+          <h1 className="cart-page-title">Mein Warenkorb</h1>
 
           {cart.length === 0 ? (
             <div className="empty-cart">
               <i className="fa-solid fa-basket-shopping empty-icon"></i>
-              <h2>Votre panier est vide</h2>
-              <p>Découvrez nos produits et faites votre choix.</p>
+              <h2>Ihr Warenkorb ist leer</h2>
+              <p>Entdecken Sie unsere Produkte und treffen Sie Ihre Auswahl.</p>
               <Link href="/" className="btn-primary-cart">
-                Retour à la boutique
+                Zurück zum Shop
               </Link>
             </div>
           ) : (
@@ -33,10 +31,10 @@ export default function CartPage() {
               {/* Liste des articles */}
               <div className="cart-items-section">
                 <div className="cart-items-header">
-                  <span>Produit</span>
-                  <span>Prix</span>
-                  <span>Quantité</span>
-                  <span>Total</span>
+                  <span>Produkt</span>
+                  <span>Preis</span>
+                  <span>Menge</span>
+                  <span>Gesamt</span>
                   <span></span>
                 </div>
 
@@ -60,7 +58,7 @@ export default function CartPage() {
 
                     {/* Prix Unitaire */}
                     <div className="cart-item-price">
-                      CHF {item.price.toFixed(2).replace(".", ",")}
+                      € {item.price.toFixed(2).replace(".", ",")}
                     </div>
 
                     {/* Quantité */}
@@ -84,14 +82,14 @@ export default function CartPage() {
 
                     {/* Total Unitaire */}
                     <div className="cart-item-total">
-                      CHF {(item.price * item.quantity).toFixed(2).replace(".", ",")}
+                      € {(item.price * item.quantity).toFixed(2).replace(".", ",")}
                     </div>
 
                     {/* Supprimer */}
                     <button
                       className="btn-remove"
                       onClick={() => removeFromCart(item.id)}
-                      aria-label="Supprimer"
+                      aria-label="Löschen"
                     >
                       <i className="fa-solid fa-trash"></i>
                     </button>
@@ -100,41 +98,41 @@ export default function CartPage() {
 
                 <div className="cart-actions-bottom">
                   <button className="btn-clear" onClick={clearCart}>
-                    Vider le panier
+                    Warenkorb leeren
                   </button>
                   <Link href="/" className="btn-continue">
-                    <i className="fa-solid fa-arrow-left"></i> Continuer mes achats
+                    <i className="fa-solid fa-arrow-left"></i> Weiter einkaufen
                   </Link>
                 </div>
               </div>
 
               {/* Récapitulatif Commande */}
               <div className="cart-summary-card">
-                <h3>Récapitulatif de la commande</h3>
+                <h3>Bestellübersicht</h3>
 
                 <div className="summary-row">
-                  <span>Sous-total</span>
-                  <span>CHF {subtotal.toFixed(2).replace(".", ",")}</span>
+                  <span>Zwischensumme</span>
+                  <span>€ {subtotal.toFixed(2).replace(".", ",")}</span>
                 </div>
 
                 <div className="summary-row">
-                  <span>Livraison</span>
+                  <span>Lieferung</span>
                   <span>
                     {shippingCost === 0
-                      ? "Gratuite"
-                      : `CHF ${shippingCost.toFixed(2).replace(".", ",")}`}
+                      ? "Kostenlos"
+                      : `€ ${shippingCost.toFixed(2).replace(".", ",")}`}
                   </span>
                 </div>
 
                 <div className="summary-divider"></div>
 
                 <div className="summary-row total">
-                  <span>Total (TVA incl.)</span>
-                  <span>CHF {grandTotal.toFixed(2).replace(".", ",")}</span>
+                  <span>Gesamtsumme (inkl. MwSt.)</span>
+                  <span>€ {grandTotal.toFixed(2).replace(".", ",")}</span>
                 </div>
 
                 <button className="btn-checkout">
-                  Passer la commande
+                  Zur Kasse
                   <i className="fa-solid fa-arrow-right"></i>
                 </button>
               </div>

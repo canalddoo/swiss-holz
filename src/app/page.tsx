@@ -6,6 +6,7 @@ import Categories from "@/components/Categories";
 import BestSellers from "@/components/BestSellers";
 import WhyUs from "@/components/WhyUs";
 import Testimonials from "@/components/Testimonials";
+import Poele from "@/components/Poele";
 
 export default function Home() {
   const scrollToTop = () => {
@@ -26,48 +27,51 @@ export default function Home() {
       {/* 3. Section Best-Sellers */}
       <BestSellers />
 
+      <Poele />
+
       {/* 4. Pourquoi SwissHolz */}
       <WhyUs />
 
       {/* 5. Bannière Promotionnelle (Offre d'hiver) */}
+      
       <section className="promo-banner-section">
-        <div className="promo-banner-container">
-          <div className="promo-banner-content">
-            {/* Badge -50% */}
-            <div className="promo-badge">
-              <i className="fa-solid fa-bolt"></i>
-              <span>-50%</span>
-            </div>
+  <div className="promo-banner-container">
+    <div className="promo-banner-content">
+      {/* Badge -50% */}
+      <div className="promo-badge">
+        <i className="fa-solid fa-bolt"></i>
+        <span>-50%</span>
+      </div>
 
-            {/* Titre */}
-            <h2 className="promo-title">
-              Profitez de nos offres avec des économies allant jusqu'à 50 %
-            </h2>
+      {/* Titre */}
+      <h2 className="promo-title">
+        Profitieren Sie von unseren Angeboten mit Ersparnissen von bis zu 50 %
+      </h2>
 
-            {/* Sous-titre */}
-            <p className="promo-subtitle">
-              Offre d'hiver – dans la limite des stocks disponibles.
-            </p>
-          </div>
+      {/* Sous-titre */}
+      <p className="promo-subtitle">
+        Winterangebot – solange der Vorrat reicht.
+      </p>
+    </div>
 
-          {/* Bouton CTA */}
-          <Link href="/bois-de-chauffage" className="promo-btn">
-            <span>Achetez maintenant</span>
-            <i className="fa-solid fa-arrow-right"></i>
-          </Link>
-        </div>
-      </section>
-
+    {/* Bouton CTA */}
+    <Link href="/bois-de-chauffage" className="promo-btn">
+      <span>Jetzt kaufen</span>
+      <i className="fa-solid fa-arrow-right"></i>
+    </Link>
+  </div>
+</section>
       {/* 6. Témoignages */}
       <Testimonials />
 
       {/* 7. Section Bouton Retour en haut */}
+
       <section className="scroll-top-section">
         {/* Bouton Retour en haut fixe */}
 <button
   onClick={scrollToTop}
   className="scroll-top-btn-fixed"
-  aria-label="Retour en haut de la page"
+  aria-label="top"
 >
   <i className="fa-solid fa-arrow-up"></i>
   {/* <span>Retour en haut</span> */}

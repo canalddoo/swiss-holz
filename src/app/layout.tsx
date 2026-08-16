@@ -6,9 +6,9 @@ import Footer from "@/components/Footer";
 import { CartProvider } from "@/context/CartContext";
 
 export const metadata: Metadata = {
-  title: "Swiss Holz - Vente de bois de chauffage & granulés",
+  title: "Swiss Holz - Verkauf von Brennholz & Holzpellets",
   description:
-    "Carburants suisses de la plus haute qualité, issus directement de forêts gérées durablement.",
+    "Schweizer Brennstoffe von höchster Qualität, direkt aus nachhaltig bewirtschafteten Wäldern.",
 };
 
 export default function RootLayout({
@@ -17,7 +17,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="fr">
+    <html lang="de">
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link
@@ -45,10 +45,10 @@ export default function RootLayout({
               minHeight: "100vh",
             }}
           >
-            {/* Header & Navigation responsive */}
+            {/* Navigation Header */}
             <Navbar />
 
-            {/* Contenu principal de la page */}
+            {/* Hauptinhalt */}
             <main className="main-content" style={{ flex: 1 }}>
               {children}
             </main>

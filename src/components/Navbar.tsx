@@ -9,20 +9,42 @@ import { useCart } from "@/context/CartContext";
 export default function Navbar() {
   const pathname = usePathname();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [lang, setLang] = useState<"DE" | "FR">("FR");
+  const [lang, setLang] = useState<"DE" | "FR">("DE");
 
   const { totalItems } = useCart();
 
   const isActive = (path: string) => pathname === path;
 
+  // Dictionnaire de traductions pour le menu
+  const translations = {
+    DE: {
+      home: "Startseite",
+      about: "Über uns",
+      shop: "Shop",
+      categories: "Kategorien",
+      contact: "Kontakt",
+      searchLabel: "Suchen",
+      cartLabel: "Warenkorb",
+    },
+    FR: {
+      home: "Accueil",
+      about: "À propos de nous",
+      shop: "Boutique",
+      categories: "Catégories",
+      contact: "Contact",
+      searchLabel: "Rechercher",
+      cartLabel: "Panier",
+    },
+  };
+
+  const t = translations[lang];
+
   const navLinks = [
-    { name: "À propos de nous", path: "/a-propos" },
-    { name: "bois de chauffage", path: "/bois-de-chauffage" },
-    { name: "Granulés", path: "/granules" },
-    { name: "Briquettes", path: "/briquettes" },
-    { name: "Bois pressé", path: "/bois-presse" },
-    { name: "Fours", path: "/fours" },
-    { name: "contact", path: "/contact" },
+    { name: t.home, path: "/" },
+    { name: t.about, path: "/a-propos" },
+    { name: t.shop, path: "/boutique" },
+    { name: t.categories, path: "/granules" },
+    { name: t.contact, path: "/contact" },
   ];
 
   return (
@@ -54,29 +76,19 @@ export default function Navbar() {
 
         {/* Actions à droite */}
         <div className="navbar-actions">
-          {/* Switcher de langue */}
-          <div className="lang-toggle">
-            <button
-              className={`lang-btn ${lang === "DE" ? "active" : ""}`}
-              onClick={() => setLang("DE")}
-            >
-              DE
-            </button>
-            <button
-              className={`lang-btn ${lang === "FR" ? "active" : ""}`}
-              onClick={() => setLang("FR")}
-            >
-              FR
-            </button>
-          </div>
-
+          {/* Selecteur de langue Desktop */}
+        
           {/* Recherche */}
-          <button className="icon-btn search-btn" aria-label="Rechercher">
+          <button className="icon-btn search-btn" aria-label={t.searchLabel}>
             <i className="fa-solid fa-magnifying-glass"></i>
           </button>
 
           {/* Panier avec badge */}
-          <Link href="/panier" className="icon-btn cart-btn" aria-label="Panier">
+          <Link
+            href="/panier"
+            className="icon-btn cart-btn"
+            aria-label={t.cartLabel}
+          >
             <i className="fa-solid fa-cart-shopping"></i>
             {totalItems > 0 && <span className="cart-badge">{totalItems}</span>}
           </Link>
@@ -87,7 +99,9 @@ export default function Navbar() {
             onClick={() => setIsMenuOpen(!isMenuOpen)}
             aria-label="Toggle menu"
           >
-            <i className={isMenuOpen ? "fa-solid fa-xmark" : "fa-solid fa-bars"}></i>
+            <i
+              className={isMenuOpen ? "fa-solid fa-xmark" : "fa-solid fa-bars"}
+            ></i>
           </button>
         </div>
       </div>
@@ -97,7 +111,12 @@ export default function Navbar() {
         <div className="mobile-menu-overlay">
           <div className="mobile-menu">
             <div className="mobile-menu-header">
-              <Image src="/img/logo.png" alt="Swiss Holz" width={100} height={35} />
+              <Image
+                src="/img/logo.png"
+                alt="Swiss Holz"
+                width={100}
+                height={35}
+              />
               <div className="mobile-menu-actions">
                 <Link
                   href="/panier"
@@ -133,20 +152,7 @@ export default function Navbar() {
               ))}
             </nav>
 
-            <div className="mobile-lang-toggle">
-              <button
-                className={`lang-btn-large ${lang === "DE" ? "active" : ""}`}
-                onClick={() => setLang("DE")}
-              >
-                DE
-              </button>
-              <button
-                className={`lang-btn-large ${lang === "FR" ? "active" : ""}`}
-                onClick={() => setLang("FR")}
-              >
-                FR
-              </button>
-            </div>
+            
           </div>
         </div>
       )}

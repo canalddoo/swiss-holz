@@ -16,7 +16,7 @@ const testimonials: Testimonial[] = [
     id: 1,
     rating: 5,
     quote:
-      "« Les meilleures briquettes que j'aie jamais eues. Longue durée de combustion, peu de cendres. »",
+      "« Die besten Briketts, die ich je hatte. Lange Brenndauer und sehr wenig Asche. »",
     initials: "M",
     name: "Marco Bernasconi",
     city: "Lugano",
@@ -25,16 +25,16 @@ const testimonials: Testimonial[] = [
     id: 2,
     rating: 5,
     quote:
-      "« Bois sec, livraison ponctuelle, service impeccable. Je commande chaque année. »",
-    initials: "UN",
+      "« Trockenes Holz, pünktliche Lieferung und einwandfreier Service. Ich bestelle jedes Jahr. »",
+    initials: "A",
     name: "Andrea Meier",
-    city: "Zurich",
+    city: "Zürich",
   },
   {
     id: 3,
     rating: 5,
     quote:
-      "« Les granulés brûlent très proprement. Le rapport qualité-prix est excellent. »",
+      "« Die Pellets verbrennen sehr sauber. Das Preis-Leistungs-Verhältnis ist hervorragend. »",
     initials: "L",
     name: "Luc Rochat",
     city: "Lausanne",
@@ -43,7 +43,7 @@ const testimonials: Testimonial[] = [
     id: 4,
     rating: 5,
     quote:
-      "« Les conseils que j'ai reçus par téléphone étaient excellents. Mon nouveau four a été livré en parfait état. »",
+      "« Die telefonische Beratung war ausgezeichnet. Mein neuer Kaminofen wurde in einwandfreiem Zustand geliefert. »",
     initials: "S",
     name: "Sandra Bühler",
     city: "Bern",
@@ -51,31 +51,31 @@ const testimonials: Testimonial[] = [
 ];
 
 export default function Testimonials() {
-  const [activeDot, setActiveDot] = useState(2); // Le 3ème dot est actif par défaut comme sur les captures
+  const [activeDot, setActiveDot] = useState(2); // 3. Dot standardmässig aktiv
 
   return (
     <section className="testimonials-section">
       <div className="testimonials-container">
-        {/* Titre centré */}
+        {/* Zentrierter Titel */}
         <div className="testimonials-header">
-          <h2 className="testimonials-title">Ce que disent nos clients</h2>
+          <h2 className="testimonials-title">Das sagen unsere Kunden</h2>
         </div>
 
-        {/* Grille des cartes */}
+        {/* Karten-Raster */}
         <div className="testimonials-grid">
           {testimonials.slice(0, 3).map((item) => (
             <div key={item.id} className="testimonial-card">
-              {/* Étoiles d'évaluation */}
+              {/* Sterne-Bewertung */}
               <div className="testimonial-stars">
                 {[...Array(item.rating)].map((_, i) => (
                   <i key={i} className="fa-solid fa-star"></i>
                 ))}
               </div>
 
-              {/* Texte du témoignage */}
+              {/* Kundenbewertung Text */}
               <p className="testimonial-quote">{item.quote}</p>
 
-              {/* Auteur */}
+              {/* Autor */}
               <div className="testimonial-author">
                 <div className="author-avatar">{item.initials}</div>
                 <div className="author-info">
@@ -87,7 +87,7 @@ export default function Testimonials() {
           ))}
         </div>
 
-        {/* Navigation Dots centrée */}
+        {/* Zentrierte Navigation (Dots) */}
         <div className="testimonials-pagination">
           {[0, 1, 2, 3].map((index) => (
             <button
@@ -96,7 +96,7 @@ export default function Testimonials() {
                 activeDot === index ? "active" : ""
               }`}
               onClick={() => setActiveDot(index)}
-              aria-label={`Go to slide ${index + 1}`}
+              aria-label={`Zu Slide ${index + 1} wechseln`}
             />
           ))}
         </div>

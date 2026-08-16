@@ -27,19 +27,19 @@ const CartContext = createContext<CartContextType | undefined>(undefined);
 export function CartProvider({ children }: { children: ReactNode }) {
   const [cart, setCart] = useState<CartItem[]>([]);
 
-  // Charger le panier depuis localStorage au démarrage
+  // Laden des Warenkorbs aus dem localStorage beim Start
   useEffect(() => {
     const savedCart = localStorage.getItem("swissholz_cart");
     if (savedCart) {
       try {
         setCart(JSON.parse(savedCart));
       } catch (error) {
-        console.error("Erreur de chargement du panier:", error);
+        console.error("Fehler beim Laden des Warenkorbs:", error);
       }
     }
   }, []);
 
-  // Sauvegarder dans localStorage à chaque modification
+  // Bei jeder Änderung im localStorage speichern
   useEffect(() => {
     localStorage.setItem("swissholz_cart", JSON.stringify(cart));
   }, [cart]);
@@ -95,7 +95,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
 export function useCart() {
   const context = useContext(CartContext);
   if (!context) {
-    throw new Error("useCart doit être utilisé à l'intérieur d'un CartProvider");
+    throw new Error("useCart muss innerhalb eines CartProviders verwendet werden");
   }
   return context;
 }

@@ -21,35 +21,35 @@ const slides: Slide[] = [
     id: 1,
     badge: "SWISSHOLZ",
     badgeIcon: "fa-tree",
-    title: "Une chaleur naturelle pour votre maison",
-    description: "Bois de chauffage de première qualité, livré dans toute la Suisse.",
-    btnPrimaryText: "Achetez maintenant",
+    title: "Natürliche Wärme für Ihr Zuhause",
+    description: "Erstklassiges Brennholz, geliefert in der ganzen Schweiz.",
+    btnPrimaryText: "Jetzt kaufen",
     btnPrimaryLink: "/bois-de-chauffage",
-    btnSecondaryText: "Nos catégories",
+    btnSecondaryText: "Unsere Kategorien",
     btnSecondaryLink: "#categories",
-    bgImage: "/img/hero-1.jpeg", // Remplace par tes images de Pinterest
+    bgImage: "/img/hero-1.jpeg",
   },
   {
     id: 2,
-    badge: "BOIS DE CHAUFFAGE DE PREMIÈRE QUALITÉ",
+    badge: "PREMIUM BRENNHOLZ",
     badgeIcon: "fa-fire",
-    title: "Bois séché au four",
-    description: "Rendement énergétique élevé, humidité résiduelle inférieure à 18 %.",
-    btnPrimaryText: "Voir les produits",
+    title: "Kammertrockenes Holz",
+    description: "Hoher Heizwert, Restfeuchte unter 18 %.",
+    btnPrimaryText: "Produkte anzeigen",
     btnPrimaryLink: "/bois-de-chauffage",
-    btnSecondaryText: "Nos catégories",
+    btnSecondaryText: "Unsere Kategorien",
     btnSecondaryLink: "#categories",
     bgImage: "/img/hero-2.jpeg",
   },
   {
     id: 3,
-    badge: "LIVRAISON GRATUITE",
+    badge: "KOSTENLOSE LIEFERUNG",
     badgeIcon: "fa-truck-fast",
-    title: "Rapide à travers toute la Suisse",
-    description: "Commandez aujourd'hui, livraison en 24 à 72 heures.",
-    btnPrimaryText: "Découvrir",
+    title: "Schnell in der ganzen Schweiz",
+    description: "Heute bestellen, Lieferung innerhalb von 24 bis 72 Stunden.",
+    btnPrimaryText: "Entdecken",
     btnPrimaryLink: "/granules",
-    btnSecondaryText: "Nos catégories",
+    btnSecondaryText: "Unsere Kategorien",
     btnSecondaryLink: "#categories",
     bgImage: "/img/hero-3.jpeg",
   },
@@ -59,7 +59,7 @@ export default function Hero() {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isHovered, setIsHovered] = useState(false);
   
-  // Gestion du Drag / Swipe
+  // Gestaltung von Drag / Swipe
   const [isDragging, setIsDragging] = useState(false);
   const [startX, setStartX] = useState(0);
   const [dragOffset, setDragOffset] = useState(0);
@@ -74,7 +74,7 @@ export default function Hero() {
     setCurrentSlide((prev) => (prev === 0 ? slides.length - 1 : prev - 1));
   };
 
-  // Autoplay (s'arrête sur survol)
+  // Autoplay (stoppt bei Hover)
   useEffect(() => {
     if (isHovered || isDragging) return;
     const interval = setInterval(() => {
@@ -83,7 +83,7 @@ export default function Hero() {
     return () => clearInterval(interval);
   }, [currentSlide, isHovered, isDragging]);
 
-  // Événements Touch / Mouse pour le Drag
+  // Touch- und Maus-Events für Drag
   const handleTouchStart = (e: React.TouchEvent) => {
     setIsDragging(true);
     setStartX(e.touches[0].clientX);
@@ -151,24 +151,24 @@ export default function Hero() {
             className="hero-slide"
             style={{ backgroundImage: `url(${slide.bgImage})` }}
           >
-            {/* Overlay sombre pour améliorer la lisibilité du texte */}
+            {/* Dunkler Overlay für bessere Lesbarkeit */}
             <div className="hero-overlay"></div>
 
             <div className="hero-content-container">
               <div className="hero-content">
-                {/* Badge supérieur */}
+                {/* Badge */}
                 <div className="hero-badge">
                   <i className={`fa-solid ${slide.badgeIcon}`}></i>
                   <span>{slide.badge}</span>
                 </div>
 
-                {/* Titre principal */}
+                {/* Haupttitel */}
                 <h1 className="hero-title">{slide.title}</h1>
 
-                {/* Description */}
+                {/* Beschreibung */}
                 <p className="hero-description">{slide.description}</p>
 
-                {/* Boutons d'action */}
+                {/* Aktions-Buttons */}
                 <div className="hero-buttons">
                   <Link href={slide.btnPrimaryLink} className="btn-hero-primary">
                     {slide.btnPrimaryText}
@@ -184,24 +184,24 @@ export default function Hero() {
         ))}
       </div>
 
-      {/* Pagination (Points en bas au centre) */}
+      {/* Navigation-Dots unten mittig */}
       <div className="hero-dots">
         {slides.map((_, index) => (
           <button
             key={index}
             className={`hero-dot ${currentSlide === index ? "active" : ""}`}
             onClick={() => setCurrentSlide(index)}
-            aria-label={`Aller à la slide ${index + 1}`}
+            aria-label={`Gehe zu Slide ${index + 1}`}
           />
         ))}
       </div>
 
-      {/* Flèches de navigation en bas à droite */}
+      {/* Navigationspfeile unten rechts */}
       <div className="hero-nav-buttons">
-        <button className="hero-arrow-btn" onClick={prevSlide} aria-label="Slide précédente">
+        <button className="hero-arrow-btn" onClick={prevSlide} aria-label="Vorheriges Slide">
           <i className="fa-solid fa-chevron-left"></i>
         </button>
-        <button className="hero-arrow-btn" onClick={nextSlide} aria-label="Slide suivante">
+        <button className="hero-arrow-btn" onClick={nextSlide} aria-label="Nächstes Slide">
           <i className="fa-solid fa-chevron-right"></i>
         </button>
       </div>
