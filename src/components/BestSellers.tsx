@@ -200,7 +200,7 @@ export default function BestSellers() {
                       price: product.price,
                       oldPrice: product.oldPrice,
                       image: product.image,
-                      quantity: 1,
+                      // quantity: 1,
                     })
                   }
                 >

@@ -158,7 +158,7 @@ export default function Poele() {
                       price: product.price,
                       oldPrice: product.oldPrice,
                       image: product.image,
-                      quantity: 1,
+                      // quantity: 1,
                     })
                   }
                 >
