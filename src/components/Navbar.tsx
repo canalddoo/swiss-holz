@@ -9,42 +9,17 @@ import { useCart } from "@/context/CartContext";
 export default function Navbar() {
   const pathname = usePathname();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [lang, setLang] = useState<"DE" | "FR">("DE");
 
   const { totalItems } = useCart();
 
   const isActive = (path: string) => pathname === path;
 
-  // Dictionnaire de traductions pour le menu
-  const translations = {
-    DE: {
-      home: "Startseite",
-      about: "Über uns",
-      shop: "Shop",
-      categories: "Kategorien",
-      contact: "Kontakt",
-      searchLabel: "Suchen",
-      cartLabel: "Warenkorb",
-    },
-    FR: {
-      home: "Accueil",
-      about: "À propos de nous",
-      shop: "Boutique",
-      categories: "Catégories",
-      contact: "Contact",
-      searchLabel: "Rechercher",
-      cartLabel: "Panier",
-    },
-  };
-
-  const t = translations[lang];
-
   const navLinks = [
-    { name: t.home, path: "/" },
-    { name: t.about, path: "/a-propos" },
-    { name: t.shop, path: "/boutique" },
-    { name: t.categories, path: "/granules" },
-    { name: t.contact, path: "/contact" },
+    { name: "Startseite", path: "/" },
+    { name: "Über uns", path: "/a-propos" },
+    { name: "Shop", path: "/boutique" },
+    { name: "Kategorien", path: "/granules" },
+    { name: "Kontakt", path: "/contact" },
   ];
 
   return (
@@ -76,10 +51,8 @@ export default function Navbar() {
 
         {/* Actions à droite */}
         <div className="navbar-actions">
-          {/* Selecteur de langue Desktop */}
-        
           {/* Recherche */}
-          <button className="icon-btn search-btn" aria-label={t.searchLabel}>
+          <button className="icon-btn search-btn" aria-label="Suchen">
             <i className="fa-solid fa-magnifying-glass"></i>
           </button>
 
@@ -87,7 +60,7 @@ export default function Navbar() {
           <Link
             href="/panier"
             className="icon-btn cart-btn"
-            aria-label={t.cartLabel}
+            aria-label="Warenkorb"
           >
             <i className="fa-solid fa-cart-shopping"></i>
             {totalItems > 0 && <span className="cart-badge">{totalItems}</span>}
@@ -97,7 +70,7 @@ export default function Navbar() {
           <button
             className="menu-burger-btn"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
-            aria-label="Toggle menu"
+            aria-label="Menü öffnen"
           >
             <i
               className={isMenuOpen ? "fa-solid fa-xmark" : "fa-solid fa-bars"}
@@ -151,8 +124,6 @@ export default function Navbar() {
                 </Link>
               ))}
             </nav>
-
-            
           </div>
         </div>
       )}
