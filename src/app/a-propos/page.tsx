@@ -109,21 +109,8 @@ export default function AboutPage() {
               {/* Réseaux sociaux */}
               <div className="about-social-divider">
                 <div className="about-social-links">
-                  <a href="#" aria-label="Facebook" className="social-icon">
-                    <i className="fa-brands fa-facebook-f"></i>
-                  </a>
-                  <a href="#" aria-label="X (Twitter)" className="social-icon">
-                    <i className="fa-brands fa-x-twitter"></i>
-                  </a>
-                  <a href="#" aria-label="Pinterest" className="social-icon">
-                    <i className="fa-brands fa-pinterest-p"></i>
-                  </a>
-                  <a href="#" aria-label="LinkedIn" className="social-icon">
-                    <i className="fa-brands fa-linkedin-in"></i>
-                  </a>
-                  <a href="#" aria-label="Telegram" className="social-icon">
-                    <i className="fa-brands fa-telegram"></i>
-                  </a>
+                 
+                 
                 </div>
               </div>
             </div>
