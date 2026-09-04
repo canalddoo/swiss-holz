@@ -9,8 +9,23 @@ export default function CartPage() {
   const { cart, removeFromCart, updateQuantity, subtotal, clearCart } =
     useCart();
 
-  const [showBankModal, setShowBankModal] = useState(false);
+  const [showCheckoutModal, setShowCheckoutModal] = useState(false);
+  const [step, setStep] = useState<"form" | "bank">("form");
   const [copiedField, setCopiedField] = useState<string | null>(null);
+  
+  // États pour la soumission backend
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
+
+  // État du formulaire d'informations client
+  const [formData, setFormData] = useState({
+    firstName: "",
+    lastName: "",
+    country: "Schweiz",
+    streetAddress: "",
+    whatsapp: "",
+    email: "",
+  });
 
   const shippingCost = subtotal > 150 || cart.length === 0 ? 0 : 15.0;
   const grandTotal = subtotal + shippingCost;
@@ -22,10 +37,60 @@ export default function CartPage() {
     address: "Via Piodella 18 Muzzano 6933",
   };
 
+  const handleInputChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+  ) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  };
+
+  // SOUMISSION VERS LE BACKEND / TURSO
+  const handleFormSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    setErrorMessage(null);
+
+    try {
+      const response = await fetch("/api/orders", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          customer: formData,
+          subtotal,
+          shippingCost,
+          grandTotal,
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error("Fehler beim Speichern der Bestellung");
+      }
+
+      // Vider le panier après l'enregistrement
+      clearCart();
+
+      // Passer à l'étape des coordonnées bancaires
+      setStep("bank");
+    } catch (error) {
+      console.error("Erreur commande:", error);
+      setErrorMessage("Ein Fehler ist aufgetreten. Bitte versuchen Sie es erneut.");
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
   const handleCopy = (text: string, fieldName: string) => {
     navigator.clipboard.writeText(text);
     setCopiedField(fieldName);
     setTimeout(() => setCopiedField(null), 2000);
+  };
+
+  const handleCloseModal = () => {
+    setShowCheckoutModal(false);
+    setStep("form");
+    setErrorMessage(null);
   };
 
   return (
@@ -150,7 +215,10 @@ export default function CartPage() {
 
                 <button
                   className="btn-checkout"
-                  onClick={() => setShowBankModal(true)}
+                  onClick={() => {
+                    setStep("form");
+                    setShowCheckoutModal(true);
+                  }}
                 >
                   Zur Kasse
                   <i className="fa-solid fa-arrow-right"></i>
@@ -161,9 +229,9 @@ export default function CartPage() {
         </div>
       </main>
 
-      {/* MODALE D'INFORMATIONS BANCAIRES */}
-      {showBankModal && (
-        <div className="modal-overlay" onClick={() => setShowBankModal(false)}>
+      {/* MODALE DE COMMANDE / BANQUE */}
+      {showCheckoutModal && (
+        <div className="modal-overlay" onClick={handleCloseModal}>
           <div
             className="bank-modal-card"
             onClick={(e) => e.stopPropagation()}
@@ -171,93 +239,224 @@ export default function CartPage() {
             {/* Bouton Fermer */}
             <button
               className="modal-close-btn"
-              onClick={() => setShowBankModal(false)}
+              onClick={handleCloseModal}
               aria-label="Schließen"
             >
               <i className="fa-solid fa-xmark"></i>
             </button>
 
-            <div className="modal-header">
-              <div className="icon-wrapper">
-                <i className="fa-solid fa-building-columns"></i>
-              </div>
-              <h2>Bankverbindung für die Überweisung</h2>
-              <p>
-                Bitte überweisen Sie den Gesamtbetrag von{" "}
-                <strong>CHF {grandTotal.toFixed(2).replace(".", ",")}</strong> an
-                die folgende Bankverbindung:
-              </p>
-            </div>
+            {step === "form" ? (
+              /* ÉTAPE 1 : FORMULAIRE DE LIVRAISON */
+              <div className="checkout-form-container">
+                <div className="modal-header">
+                  <div className="icon-wrapper">
+                    <i className="fa-solid fa-truck-fast"></i>
+                  </div>
+                  <h2>Lieferadresse & Kontakt</h2>
+                  <p>
+                    Bitte geben Sie Ihre Daten ein, um zur Zahlungsanweisung zu gelangen.
+                  </p>
+                </div>
 
-            <div className="bank-details-list">
-              <div className="bank-detail-item">
-                <span className="detail-label">Kontoinhaber:</span>
-                <div className="detail-value-wrap">
-                  <strong className="detail-value">{bankDetails.name}</strong>
-                  <button
-                    className="copy-btn"
-                    onClick={() => handleCopy(bankDetails.name, "name")}
+                {errorMessage && (
+                  <div className="error-alert" style={{ color: "red", marginBottom: "1rem", textAlign: "center" }}>
+                    {errorMessage}
+                  </div>
+                )}
+
+                <form onSubmit={handleFormSubmit} className="checkout-form">
+                  <div className="form-row">
+                    <div className="form-group">
+                      <label htmlFor="firstName">Vorname *</label>
+                      <input
+                        type="text"
+                        id="firstName"
+                        name="firstName"
+                        required
+                        value={formData.firstName}
+                        onChange={handleInputChange}
+                        placeholder="Max"
+                      />
+                    </div>
+                    <div className="form-group">
+                      <label htmlFor="lastName">Nachname *</label>
+                      <input
+                        type="text"
+                        id="lastName"
+                        name="lastName"
+                        required
+                        value={formData.lastName}
+                        onChange={handleInputChange}
+                        placeholder="Mustermann"
+                      />
+                    </div>
+                  </div>
+
+                  <div className="form-group">
+                    <label htmlFor="country">Land *</label>
+                    <select
+                      id="country"
+                      name="country"
+                      value={formData.country}
+                      onChange={handleInputChange}
+                      required
+                    >
+                      {/* Pays frontaliers directs */}
+                      <option value="Schweiz">Schweiz</option>
+                      <option value="Deutschland">Deutschland</option>
+                      <option value="Österreich">Österreich</option>
+                      <option value="Frankreich">Frankreich</option>
+                      <option value="Italien">Italien</option>
+                      <option value="Liechtenstein">Liechtenstein</option>
+                      <option value="Belgien">Belgien</option>
+                      <option value="Luxemburg">Luxemburg</option>
+                      <option value="Niederlande">Niederlande</option>
+                      <option value="Tschechien">Tschechien</option>
+                      <option value="Slowakei">Slowakei</option>
+                      <option value="Slowenien">Slowenien</option>
+                      <option value="Ungarn">Ungarn</option>
+                      <option value="Polen">Polen</option>
+                      <option value="Spanien">Spanien</option>
+                      <option value="Vereinigtes Königreich">Vereinigtes Königreich</option>
+                    </select>
+                  </div>
+
+                  <div className="form-group">
+                    <label htmlFor="streetAddress">Lieferadresse (Straße & Nr.) *</label>
+                    <input
+                      type="text"
+                      id="streetAddress"
+                      name="streetAddress"
+                      required
+                      value={formData.streetAddress}
+                      onChange={handleInputChange}
+                      placeholder="Musterstraße 12"
+                    />
+                  </div>
+
+                  <div className="form-row">
+                    <div className="form-group">
+                      <label htmlFor="whatsapp">WhatsApp-Nummer *</label>
+                      <input
+                        type="tel"
+                        id="whatsapp"
+                        name="whatsapp"
+                        required
+                        value={formData.whatsapp}
+                        onChange={handleInputChange}
+                        placeholder="+41 79 123 45 67"
+                      />
+                    </div>
+                    <div className="form-group">
+                      <label htmlFor="email">E-Mail-Adresse *</label>
+                      <input
+                        type="email"
+                        id="email"
+                        name="email"
+                        required
+                        value={formData.email}
+                        onChange={handleInputChange}
+                        placeholder="max@example.ch"
+                      />
+                    </div>
+                  </div>
+
+                  <button 
+                    type="submit" 
+                    className="btn-modal-submit"
+                    disabled={isSubmitting}
                   >
-                    <i className={copiedField === "name" ? "fa-solid fa-check" : "fa-regular fa-copy"}></i>
+                    {isSubmitting ? "Wird gesendet..." : "Weiter zur Zahlung"}
+                    <i className="fa-solid fa-arrow-right"></i>
+                  </button>
+                </form>
+              </div>
+            ) : (
+              /* ÉTAPE 2 : COORDONNÉES BANCAIRES */
+              <div className="bank-details-container">
+                <div className="modal-header">
+                  <div className="icon-wrapper">
+                    <i className="fa-solid fa-building-columns"></i>
+                  </div>
+                  <h2>Bankverbindung für die Überweisung</h2>
+                  <p>
+                    Vielen Dank, <strong>{formData.firstName}</strong>. Bitte überweisen Sie den Gesamtbetrag von{" "}
+                    <strong>CHF {grandTotal.toFixed(2).replace(".", ",")}</strong> an
+                    die folgende Bankverbindung:
+                  </p>
+                </div>
+
+                <div className="bank-details-list">
+                  <div className="bank-detail-item">
+                    <span className="detail-label">Kontoinhaber:</span>
+                    <div className="detail-value-wrap">
+                      <strong className="detail-value">{bankDetails.name}</strong>
+                      <button
+                        className="copy-btn"
+                        onClick={() => handleCopy(bankDetails.name, "name")}
+                      >
+                        <i className={copiedField === "name" ? "fa-solid fa-check" : "fa-regular fa-copy"}></i>
+                      </button>
+                    </div>
+                  </div>
+
+                  <div className="bank-detail-item">
+                    <span className="detail-label">IBAN:</span>
+                    <div className="detail-value-wrap">
+                      <strong className="detail-value highlight">{bankDetails.iban}</strong>
+                      <button
+                        className="copy-btn"
+                        onClick={() => handleCopy(bankDetails.iban, "iban")}
+                      >
+                        <i className={copiedField === "iban" ? "fa-solid fa-check" : "fa-regular fa-copy"}></i>
+                      </button>
+                    </div>
+                  </div>
+
+                  <div className="bank-detail-item">
+                    <span className="detail-label">BIC / SWIFT:</span>
+                    <div className="detail-value-wrap">
+                      <strong className="detail-value">{bankDetails.bic}</strong>
+                      <button
+                        className="copy-btn"
+                        onClick={() => handleCopy(bankDetails.bic, "bic")}
+                      >
+                        <i className={copiedField === "bic" ? "fa-solid fa-check" : "fa-regular fa-copy"}></i>
+                      </button>
+                    </div>
+                  </div>
+
+                  <div className="bank-detail-item">
+                    <span className="detail-label">Adresse:</span>
+                    <div className="detail-value-wrap">
+                      <span className="detail-value">{bankDetails.address}</span>
+                      <button
+                        className="copy-btn"
+                        onClick={() => handleCopy(bankDetails.address, "address")}
+                      >
+                        <i className={copiedField === "address" ? "fa-solid fa-check" : "fa-regular fa-copy"}></i>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="modal-info-box">
+                  <i className="fa-solid fa-circle-info"></i>
+                  <p>
+                    Geben Sie bei der Überweisung bitte Ihren Namen (<strong>{formData.firstName} {formData.lastName}</strong>) als Verwendungszweck an.
+                  </p>
+                </div>
+
+                <div className="modal-footer">
+                  <button
+                    className="btn-modal-close"
+                    onClick={handleCloseModal}
+                  >
+                    Verstanden & Schließen
                   </button>
                 </div>
               </div>
-
-              <div className="bank-detail-item">
-                <span className="detail-label">IBAN:</span>
-                <div className="detail-value-wrap">
-                  <strong className="detail-value highlight">{bankDetails.iban}</strong>
-                  <button
-                    className="copy-btn"
-                    onClick={() => handleCopy(bankDetails.iban, "iban")}
-                  >
-                    <i className={copiedField === "iban" ? "fa-solid fa-check" : "fa-regular fa-copy"}></i>
-                  </button>
-                </div>
-              </div>
-
-              <div className="bank-detail-item">
-                <span className="detail-label">BIC / SWIFT:</span>
-                <div className="detail-value-wrap">
-                  <strong className="detail-value">{bankDetails.bic}</strong>
-                  <button
-                    className="copy-btn"
-                    onClick={() => handleCopy(bankDetails.bic, "bic")}
-                  >
-                    <i className={copiedField === "bic" ? "fa-solid fa-check" : "fa-regular fa-copy"}></i>
-                  </button>
-                </div>
-              </div>
-
-              <div className="bank-detail-item">
-                <span className="detail-label">Adresse:</span>
-                <div className="detail-value-wrap">
-                  <span className="detail-value">{bankDetails.address}</span>
-                  <button
-                    className="copy-btn"
-                    onClick={() => handleCopy(bankDetails.address, "address")}
-                  >
-                    <i className={copiedField === "address" ? "fa-solid fa-check" : "fa-regular fa-copy"}></i>
-                  </button>
-                </div>
-              </div>
-            </div>
-
-            <div className="modal-info-box">
-              <i className="fa-solid fa-circle-info"></i>
-              <p>
-                Geben Sie bei der Überweisung bitte Ihre Bestellnummer oder Ihren Namen als Verwendungszweck an.
-              </p>
-            </div>
-
-            <div className="modal-footer">
-              <button
-                className="btn-modal-close"
-                onClick={() => setShowBankModal(false)}
-              >
-                Verstanden & Schließen
-              </button>
-            </div>
+            )}
           </div>
         </div>
       )}
