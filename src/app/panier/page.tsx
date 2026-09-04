@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useCart } from "@/context/CartContext";
@@ -8,8 +9,24 @@ export default function CartPage() {
   const { cart, removeFromCart, updateQuantity, subtotal, clearCart } =
     useCart();
 
+  const [showBankModal, setShowBankModal] = useState(false);
+  const [copiedField, setCopiedField] = useState<string | null>(null);
+
   const shippingCost = subtotal > 150 || cart.length === 0 ? 0 : 15.0;
   const grandTotal = subtotal + shippingCost;
+
+  const bankDetails = {
+    name: "Edonita Berisha",
+    iban: "CH0808490921141952718",
+    bic: "8490",
+    address: "Via Piodella 18 Muzzano 6933",
+  };
+
+  const handleCopy = (text: string, fieldName: string) => {
+    navigator.clipboard.writeText(text);
+    setCopiedField(fieldName);
+    setTimeout(() => setCopiedField(null), 2000);
+  };
 
   return (
     <>
@@ -58,7 +75,7 @@ export default function CartPage() {
 
                     {/* Prix Unitaire */}
                     <div className="cart-item-price">
-                      € {item.price.toFixed(2).replace(".", ",")}
+                      CHF {item.price.toFixed(2).replace(".", ",")}
                     </div>
 
                     {/* Quantité */}
@@ -82,7 +99,7 @@ export default function CartPage() {
 
                     {/* Total Unitaire */}
                     <div className="cart-item-total">
-                      € {(item.price * item.quantity).toFixed(2).replace(".", ",")}
+                      CHF {(item.price * item.quantity).toFixed(2).replace(".", ",")}
                     </div>
 
                     {/* Supprimer */}
@@ -112,7 +129,7 @@ export default function CartPage() {
 
                 <div className="summary-row">
                   <span>Zwischensumme</span>
-                  <span>€ {subtotal.toFixed(2).replace(".", ",")}</span>
+                  <span>CHF {subtotal.toFixed(2).replace(".", ",")}</span>
                 </div>
 
                 <div className="summary-row">
@@ -120,7 +137,7 @@ export default function CartPage() {
                   <span>
                     {shippingCost === 0
                       ? "Kostenlos"
-                      : `€ ${shippingCost.toFixed(2).replace(".", ",")}`}
+                      : `CHF ${shippingCost.toFixed(2).replace(".", ",")}`}
                   </span>
                 </div>
 
@@ -128,10 +145,13 @@ export default function CartPage() {
 
                 <div className="summary-row total">
                   <span>Gesamtsumme (inkl. MwSt.)</span>
-                  <span>€ {grandTotal.toFixed(2).replace(".", ",")}</span>
+                  <span>CHF {grandTotal.toFixed(2).replace(".", ",")}</span>
                 </div>
 
-                <button className="btn-checkout">
+                <button
+                  className="btn-checkout"
+                  onClick={() => setShowBankModal(true)}
+                >
                   Zur Kasse
                   <i className="fa-solid fa-arrow-right"></i>
                 </button>
@@ -140,6 +160,107 @@ export default function CartPage() {
           )}
         </div>
       </main>
+
+      {/* MODALE D'INFORMATIONS BANCAIRES */}
+      {showBankModal && (
+        <div className="modal-overlay" onClick={() => setShowBankModal(false)}>
+          <div
+            className="bank-modal-card"
+            onClick={(e) => e.stopPropagation()}
+          >
+            {/* Bouton Fermer */}
+            <button
+              className="modal-close-btn"
+              onClick={() => setShowBankModal(false)}
+              aria-label="Schließen"
+            >
+              <i className="fa-solid fa-xmark"></i>
+            </button>
+
+            <div className="modal-header">
+              <div className="icon-wrapper">
+                <i className="fa-solid fa-building-columns"></i>
+              </div>
+              <h2>Bankverbindung für die Überweisung</h2>
+              <p>
+                Bitte überweisen Sie den Gesamtbetrag von{" "}
+                <strong>CHF {grandTotal.toFixed(2).replace(".", ",")}</strong> an
+                die folgende Bankverbindung:
+              </p>
+            </div>
+
+            <div className="bank-details-list">
+              <div className="bank-detail-item">
+                <span className="detail-label">Kontoinhaber:</span>
+                <div className="detail-value-wrap">
+                  <strong className="detail-value">{bankDetails.name}</strong>
+                  <button
+                    className="copy-btn"
+                    onClick={() => handleCopy(bankDetails.name, "name")}
+                  >
+                    <i className={copiedField === "name" ? "fa-solid fa-check" : "fa-regular fa-copy"}></i>
+                  </button>
+                </div>
+              </div>
+
+              <div className="bank-detail-item">
+                <span className="detail-label">IBAN:</span>
+                <div className="detail-value-wrap">
+                  <strong className="detail-value highlight">{bankDetails.iban}</strong>
+                  <button
+                    className="copy-btn"
+                    onClick={() => handleCopy(bankDetails.iban, "iban")}
+                  >
+                    <i className={copiedField === "iban" ? "fa-solid fa-check" : "fa-regular fa-copy"}></i>
+                  </button>
+                </div>
+              </div>
+
+              <div className="bank-detail-item">
+                <span className="detail-label">BIC / SWIFT:</span>
+                <div className="detail-value-wrap">
+                  <strong className="detail-value">{bankDetails.bic}</strong>
+                  <button
+                    className="copy-btn"
+                    onClick={() => handleCopy(bankDetails.bic, "bic")}
+                  >
+                    <i className={copiedField === "bic" ? "fa-solid fa-check" : "fa-regular fa-copy"}></i>
+                  </button>
+                </div>
+              </div>
+
+              <div className="bank-detail-item">
+                <span className="detail-label">Adresse:</span>
+                <div className="detail-value-wrap">
+                  <span className="detail-value">{bankDetails.address}</span>
+                  <button
+                    className="copy-btn"
+                    onClick={() => handleCopy(bankDetails.address, "address")}
+                  >
+                    <i className={copiedField === "address" ? "fa-solid fa-check" : "fa-regular fa-copy"}></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <div className="modal-info-box">
+              <i className="fa-solid fa-circle-info"></i>
+              <p>
+                Geben Sie bei der Überweisung bitte Ihre Bestellnummer oder Ihren Namen als Verwendungszweck an.
+              </p>
+            </div>
+
+            <div className="modal-footer">
+              <button
+                className="btn-modal-close"
+                onClick={() => setShowBankModal(false)}
+              >
+                Verstanden & Schließen
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </>
   );
 }

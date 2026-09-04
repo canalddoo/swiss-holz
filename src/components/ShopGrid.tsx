@@ -136,7 +136,7 @@ export default function ShopGrid() {
 
             <div className="filter-group">
               <label className="filter-label">
-                Max. Preis: <strong>€ {maxPrice.toFixed(2)}</strong>
+                Max. Preis: <strong>CHF {maxPrice.toFixed(2)}</strong>
               </label>
               <input
                 type="range"
@@ -218,11 +218,11 @@ export default function ShopGrid() {
                 <div className="product-price-box">
                   {product.oldPrice && (
                     <span className="old-price">
-                      € {product.oldPrice.toFixed(2)}
+                      CHF {product.oldPrice.toFixed(2)}
                     </span>
                   )}
                   <span className="current-price">
-                    € {product.price.toFixed(2)}
+                    CHF {product.price.toFixed(2)}
                   </span>
                 </div>
 

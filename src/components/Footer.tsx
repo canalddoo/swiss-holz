@@ -19,14 +19,14 @@ export default function Footer() {
             Schweizer Brennstoffe von höchster Qualität, direkt aus nachhaltig
             bewirtschafteten Wäldern.
           </p>
-          <div className="social-links">
+          {/* <div className="social-links">
             <a href="#" aria-label="Facebook" className="social-icon">
               <i className="fa-brands fa-facebook-f"></i>
             </a>
             <a href="#" aria-label="Instagram" className="social-icon">
               <i className="fa-brands fa-instagram"></i>
             </a>
-          </div>
+          </div> */}
         </div>
 
         {/* Colonne 2 : Produits */}
@@ -34,19 +34,19 @@ export default function Footer() {
           <h4 className="footer-heading">PRODUKTE</h4>
           <ul className="footer-links-list">
             <li>
-              <Link href="/bois-de-chauffage">Brennholz</Link>
+              <Link href="#">Brennholz</Link>
             </li>
             <li>
-              <Link href="/granules">Holzpellets</Link>
+              <Link href="#">Holzpellets</Link>
             </li>
             <li>
-              <Link href="/briquettes">Holzbriketts</Link>
+              <Link href="#">Holzbriketts</Link>
             </li>
             <li>
-              <Link href="/bois-presse">Pressholz</Link>
+              <Link href="#">Pressholz</Link>
             </li>
             <li>
-              <Link href="/fours">Kaminöfen</Link>
+              <Link href="#">Kaminöfen</Link>
             </li>
           </ul>
         </div>
@@ -56,13 +56,13 @@ export default function Footer() {
           <h4 className="footer-heading">INFORMATIONEN</h4>
           <ul className="footer-links-list">
             <li>
-              <Link href="/livraison">Lieferung</Link>
+              <Link href="#">Lieferung</Link>
             </li>
             <li>
-              <Link href="/paiement">Zahlung</Link>
+              <Link href="#">Zahlung</Link>
             </li>
             <li>
-              <Link href="/termes-et-conditions">
+              <Link href="#">
                 Allgemeine Geschäftsbedingungen
               </Link>
             </li>

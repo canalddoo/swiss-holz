@@ -135,17 +135,17 @@ export default function Poele() {
                   <span className="reviews-count">({product.reviewsCount})</span>
                 </div>
 
-                {/* Prix */}
-                <div className="product-price-box">
-                  {product.oldPrice && (
-                    <span className="old-price">
-                      {product.oldPrice.toFixed(2).replace(".", ",")} €
-                    </span>
-                  )}
-                  <span className="current-price">
-                    € {product.price.toFixed(2).replace(".", ",")}
-                  </span>
-                </div>
+               {/* Prix */}
+<div className="product-price-box">
+  {product.oldPrice && (
+    <span className="old-price">
+      CHF {product.oldPrice.toFixed(2).replace(".", ",")}
+    </span>
+  )}
+  <span className="current-price">
+    CHF {product.price.toFixed(2).replace(".", ",")}
+  </span>
+</div>
 
                 {/* Bouton d'ajout */}
                 <button
