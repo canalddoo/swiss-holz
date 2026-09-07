@@ -17,6 +17,9 @@ export default function CartPage() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
+  // Nouvel état pour conserver le montant total de la commande après vidage du panier
+  const [finalTotal, setFinalTotal] = useState<number>(0);
+
   // État du formulaire d'informations client
   const [formData, setFormData] = useState({
     firstName: "",
@@ -50,6 +53,9 @@ export default function CartPage() {
     setIsSubmitting(true);
     setErrorMessage(null);
 
+    // Sauvegarder le montant total avant de vider le panier
+    const orderTotal = grandTotal;
+
     try {
       const response = await fetch("/api/orders", {
         method: "POST",
@@ -60,7 +66,7 @@ export default function CartPage() {
           customer: formData,
           subtotal,
           shippingCost,
-          grandTotal,
+          grandTotal: orderTotal,
         }),
       });
 
@@ -68,10 +74,13 @@ export default function CartPage() {
         throw new Error("Fehler beim Speichern der Bestellung");
       }
 
-      // Vider le panier après l'enregistrement
+      // Stocker le montant final pour la vue bancaire
+      setFinalTotal(orderTotal);
+
+      // Vider le panier
       clearCart();
 
-      // Passer à l'étape des coordonnées bancaires
+      // Passer à l'étape bancaire
       setStep("bank");
     } catch (error) {
       console.error("Erreur commande:", error);
@@ -301,7 +310,6 @@ export default function CartPage() {
                       onChange={handleInputChange}
                       required
                     >
-                      {/* Pays frontaliers directs */}
                       <option value="Schweiz">Schweiz</option>
                       <option value="Deutschland">Deutschland</option>
                       <option value="Österreich">Österreich</option>
@@ -381,7 +389,7 @@ export default function CartPage() {
                   <h2>Bankverbindung für die Überweisung</h2>
                   <p>
                     Vielen Dank, <strong>{formData.firstName}</strong>. Bitte überweisen Sie den Gesamtbetrag von{" "}
-                    <strong>CHF {grandTotal.toFixed(2).replace(".", ",")}</strong> an
+                    <strong>CHF {finalTotal.toFixed(2).replace(".", ",")}</strong> an
                     die folgende Bankverbindung:
                   </p>
                 </div>
