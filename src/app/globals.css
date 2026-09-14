@@ -1520,3 +1520,107 @@ a {
     justify-content: space-between;
   }
 }
+
+
+
+
+
+/* ==========================================
+   PAGE JURIDIQUE (AGB / CGV) & RESPONSIVE
+   ========================================== */
+
+.legal-page {
+  background-color: #f8f9fa;
+  padding: 3rem 1rem;
+  min-height: 80vh;
+}
+
+.legal-container {
+  max-width: 900px;
+  margin: 0 auto;
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+  padding: 2.5rem 3rem;
+  border: 1px solid #e9ecef;
+}
+
+.legal-header {
+  border-bottom: 2px solid #eef2f5;
+  padding-bottom: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.legal-title {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #1a252c;
+  margin-bottom: 0.5rem;
+}
+
+.legal-subtitle {
+  font-size: 0.95rem;
+  color: #6c757d;
+}
+
+.legal-content {
+  display: flex;
+  flex-direction: column;
+  gap: 1.75rem;
+}
+
+.legal-section h2 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #2c3e50;
+  margin-bottom: 0.75rem;
+}
+
+.legal-section p {
+  font-size: 1rem;
+  line-height: 1.7;
+  color: #4a5568;
+  margin-bottom: 0.5rem;
+}
+
+.legal-section ul {
+  list-style-type: disc;
+  padding-left: 1.5rem;
+  margin-top: 0.5rem;
+  color: #4a5568;
+}
+
+.legal-section li {
+  font-size: 0.98rem;
+  line-height: 1.6;
+  margin-bottom: 0.4rem;
+}
+
+.legal-section strong {
+  color: #1a252c;
+}
+
+/* Design Responsive */
+@media (max-width: 768px) {
+  .legal-page {
+    padding: 1.5rem 0.75rem;
+  }
+
+  .legal-container {
+    padding: 1.5rem 1.25rem;
+    border-radius: 8px;
+  }
+
+  .legal-title {
+    font-size: 1.5rem;
+  }
+
+  .legal-section h2 {
+    font-size: 1.1rem;
+  }
+
+  .legal-section p, 
+  .legal-section li {
+    font-size: 0.92rem;
+  }
+}

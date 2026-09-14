@@ -17,8 +17,8 @@ const testimonials: Testimonial[] = [
     rating: 5,
     quote:
       "« Die besten Briketts, die ich je hatte. Lange Brenndauer und sehr wenig Asche. »",
-    initials: "M",
-    name: "Marco Bernasconi",
+    initials: "T",
+    name: "Thomas Schweizer",
     city: "Lugano",
   },
   {
@@ -26,8 +26,8 @@ const testimonials: Testimonial[] = [
     rating: 5,
     quote:
       "« Trockenes Holz, pünktliche Lieferung und einwandfreier Service. Ich bestelle jedes Jahr. »",
-    initials: "A",
-    name: "Andrea Meier",
+    initials: "K",
+    name: "Karin Keller",
     city: "Zürich",
   },
   {
@@ -35,8 +35,8 @@ const testimonials: Testimonial[] = [
     rating: 5,
     quote:
       "« Die Pellets verbrennen sehr sauber. Das Preis-Leistungs-Verhältnis ist hervorragend. »",
-    initials: "L",
-    name: "Luc Rochat",
+    initials: "J",
+    name: "Jean-Pierre Blanc",
     city: "Lausanne",
   },
   {
@@ -45,8 +45,35 @@ const testimonials: Testimonial[] = [
     quote:
       "« Die telefonische Beratung war ausgezeichnet. Mein neuer Kaminofen wurde in einwandfreiem Zustand geliefert. »",
     initials: "S",
-    name: "Sandra Bühler",
+    name: "Stefan Huber",
     city: "Bern",
+  },
+  {
+    id: 5,
+    rating: 5,
+    quote:
+      "« Sehr schnelle Lieferung und erstklassige Holzqualität. Perfekt für unseren Kamin im Winter! »",
+    initials: "E",
+    name: "Elena Rossi",
+    city: "Bellinzona",
+  },
+  {
+    id: 6,
+    rating: 5,
+    quote:
+      "« Absolut zuverlässiger Händler. Die Verpackung war sauber und das Buchenholz brennt hervorragend. »",
+    initials: "M",
+    name: "Matthias Gerber",
+    city: "Basel",
+  },
+  {
+    id: 7,
+    rating: 5,
+    quote:
+      "« Hervorragender Kundenservice und faire Preise. Ich bin seit zwei Jahren treuer Kunde. »",
+    initials: "C",
+    name: "Cédric Favrod",
+    city: "Genf",
   },
 ];
 

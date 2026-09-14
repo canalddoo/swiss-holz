@@ -30,7 +30,8 @@ export default function Footer() {
         </div>
 
         {/* Colonne 2 : Produits */}
-        <div className="footer-col">
+       
+        {/* <div className="footer-col">
           <h4 className="footer-heading">PRODUKTE</h4>
           <ul className="footer-links-list">
             <li>
@@ -49,7 +50,7 @@ export default function Footer() {
               <Link href="#">Kaminöfen</Link>
             </li>
           </ul>
-        </div>
+        </div> */}
 
         {/* Colonne 3 : Information */}
         <div className="footer-col">
@@ -62,7 +63,10 @@ export default function Footer() {
               <Link href="#">Zahlung</Link>
             </li>
             <li>
-              <Link href="#">
+              <Link href="/datenschutz">Datenschutzerklärung</Link>
+            </li>
+            <li>
+              <Link href="/agb">
                 Allgemeine Geschäftsbedingungen
               </Link>
             </li>
@@ -96,7 +100,7 @@ export default function Footer() {
             </li>
             <li>
               <i className="fa-solid fa-envelope"></i>
-              <a href="mailto:info@swissholz.ch">info@swissholz.ch</a>
+              <a href="mailto:info@swisholz.ch">info@swisholz.ch</a>
             </li>
           </ul>
         </div>

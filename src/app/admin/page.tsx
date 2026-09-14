@@ -180,7 +180,7 @@ export default function AdminPage() {
                 <th>Kontakt</th>
                 <th>Gesamtsumme</th>
                 <th>Datum</th>
-                <th>Status</th>
+                {/* <th>Status</th> */}
               </tr>
             </thead>
             <tbody>
@@ -211,11 +211,11 @@ export default function AdminPage() {
                   <td>
                     {new Date(order.createdAt).toLocaleDateString("de-CH")}
                   </td>
-                  <td>
+                  {/* <td>
                     <span className={`admin-badge admin-badge-${order.status}`}>
                       {order.status === "pending" ? "Ausstehend" : order.status}
                     </span>
-                  </td>
+                  </td> */}
                 </tr>
               ))}
             </tbody>
