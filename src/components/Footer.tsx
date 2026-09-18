@@ -7,14 +7,14 @@ export default function Footer() {
       <div className="footer-container">
         {/* Colonne 1 : Brand, description & Réseaux sociaux */}
         <div className="footer-col brand-col">
-          <div className="footer-logo">
+          {/* <div className="footer-logo">
             <Image
               src="/img/logo.png"
               alt="Swiss Holz"
               width={130}
               height={45}
             />
-          </div>
+          </div> */}
           <p className="footer-description">
             Schweizer Brennstoffe von höchster Qualität, direkt aus nachhaltig
             bewirtschafteten Wäldern.

@@ -4,7 +4,7 @@ import { useEffect, useState, useRef } from "react";
 
 interface Feature {
   icon: string;
-  title: string;
+  title: string; 
   description: string;
   active?: boolean;
 }

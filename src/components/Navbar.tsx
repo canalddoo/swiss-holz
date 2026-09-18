@@ -28,10 +28,10 @@ export default function Navbar() {
         {/* Logo */}
         <Link href="/" className="navbar-logo">
           <Image
-            src="/img/logo.png"
+            src="/img/logo.jpeg"
             alt="Swiss Holz"
-            width={120}
-            height={45}
+            width={55}
+            height={55}
             priority
           />
         </Link>
